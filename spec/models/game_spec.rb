@@ -116,4 +116,11 @@ RSpec.describe Game, type: :model do
       expect(game_w_questions.current_level).to eq 0
     end
   end
+
+  # предыдущий уровень, начальный -1
+  context '.previous_level' do
+    it 'correct previous level' do
+      expect(game_w_questions.previous_level).to eq -1
+    end
+  end
 end
