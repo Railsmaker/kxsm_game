@@ -29,4 +29,11 @@ RSpec.describe GameQuestion, type: :model do
       expect(game_question.answer_correct?('b')).to be_truthy
     end
   end
+
+  context 'answer choice' do
+    # Возвращает правильный ответ, букву.
+    it 'correct .correct_answer_key' do
+      expect(game_question.correct_answer_key).to eq 'b'
+    end
+  end
 end

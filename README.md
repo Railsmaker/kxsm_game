@@ -2,7 +2,8 @@
 <h4><small>Игра: Кто хочет стать миллионером?</small></h4>
 <img src="http://hitvid.ru/uploads/posts/2012-12/1356267451_kto-hochet-stat-millionerom.png" width="355"/>
 <br />
-Правила игры: <a href="https://ru.wikipedia.org/wiki/%D0%9A%D1%82%D0%BE_%D1%85%D0%BE%D1%87%D0%B5%D1%82_%D1%81%D1%82%D0%B0%D1%82%D1%8C_%D0%BC%D0%B8%D0%BB%D0%BB%D0%B8%D0%BE%D0%BD%D0%B5%D1%80%D0%BE%D0%BC%3F"> **здесь**</a>
+Правила игры: 
+**<a href="https://ru.wikipedia.org/wiki/%D0%9A%D1%82%D0%BE_%D1%85%D0%BE%D1%87%D0%B5%D1%82_%D1%81%D1%82%D0%B0%D1%82%D1%8C_%D0%BC%D0%B8%D0%BB%D0%BB%D0%B8%D0%BE%D0%BD%D0%B5%D1%80%D0%BE%D0%BC%3F">здесь</a>**
 
 ##### 
 Игра написана на языке Ruby с использованием фрейморка Ruby on Rails,<br>
