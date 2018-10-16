@@ -110,4 +110,10 @@ RSpec.describe Game, type: :model do
     end
   end
 
+  # возвращает валидный экземпляр из модели GameQuestion
+  context '.current_game_question' do
+    it 'return valid instance of GameQuestion' do
+      expect(game_w_questions.current_level).to eq 0
+    end
+  end
 end
