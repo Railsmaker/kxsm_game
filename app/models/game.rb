@@ -102,7 +102,7 @@ class Game < ActiveRecord::Base
   end
 
   def fire_proof_prize(answered_level)
-    level = FIREPROOF_LEVELS.select { |x| x <= answered_level }.last
+    level = FIREPROOF_LEVELS.detect { |x| x == answered_level }
     level.present? ? PRIZES[level] : 0
   end
 end
