@@ -3,10 +3,10 @@ require 'support/my_spec_helper'
 
 RSpec.describe Game, type: :model do
   # Пользователь для создания игр
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
 
   # Игра с прописанными игровыми вопросами
-  let(:game_w_questions) {FactoryGirl.create(:game_with_questions, user: user)}
+  let(:game_w_questions) {FactoryBot.create(:game_with_questions, user: user)}
 
   context 'finishes game if take money' do
     it 'take_money! finishes the game' do

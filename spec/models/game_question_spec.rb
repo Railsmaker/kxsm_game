@@ -4,7 +4,7 @@ RSpec.describe GameQuestion, type: :model do
   # Задаем локальную переменную game_question, доступную во всех тестах этого
   # сценария: она будет создана на фабрике заново для каждого блока it,
   # где она вызывается.
-  let(:game_question) {FactoryGirl.create(:game_question, a: 2, b: 1, c: 4, d: 3)}
+  let(:game_question) {FactoryBot.create(:game_question, a: 2, b: 1, c: 4, d: 3)}
 
   # тест на наличие методов делегатов level и text
   it 'correct .level & .text delegates' do
