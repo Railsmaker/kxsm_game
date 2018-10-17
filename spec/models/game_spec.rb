@@ -111,16 +111,29 @@ RSpec.describe Game, type: :model do
   end
 
   # возвращает валидный экземпляр из модели GameQuestion
-  context '.current_game_question' do
+  context '#current_game_question' do
     it 'return valid instance of GameQuestion' do
-      expect(game_w_questions.current_level).to eq 0
+      expect(game_w_questions.current_game_question).to eq game_w_questions.game_questions[0]
     end
   end
 
-  # предыдущий уровень, начальный -1
+  # Переключение предыдущего уровеня
   context '.previous_level' do
-    it 'correct previous level' do
+    it 'move to next level ' do
       expect(game_w_questions.previous_level).to eq -1
+      # Задаём правильный ответ 'd'
+      game_w_questions.answer_current_question!('d')
+      expect(game_w_questions.previous_level).not_to eq -1
+    end
+  end
+
+  # Переключение текущего уровня
+  context '.current_level' do
+    it 'move to next level' do
+      expect(game_w_questions.current_level).to eq 0
+      # Задаём правильный ответ 'd'
+      game_w_questions.answer_current_question!('d')
+      expect(game_w_questions.current_level).not_to eq 0
     end
   end
 end
