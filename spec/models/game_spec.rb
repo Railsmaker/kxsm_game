@@ -10,7 +10,7 @@ RSpec.describe Game, type: :model do
 
   context 'finishes game if take money' do
     it 'take_money! finishes the game' do
-      # берем игру и отвечаем на текущий вопрос
+      # извлекаем текущий игровой вопрос и даём ответ
       q = game_w_questions.current_game_question
       game_w_questions.answer_current_question!(q.correct_answer_key)
 
@@ -113,27 +113,16 @@ RSpec.describe Game, type: :model do
   # возвращает валидный экземпляр из модели GameQuestion
   context '#current_game_question' do
     it 'return valid instance of GameQuestion' do
-      expect(game_w_questions.current_game_question).to eq game_w_questions.game_questions[0]
+      current_game_q = game_w_questions.game_questions[0]
+      expect(game_w_questions.current_game_question).to eq current_game_q
     end
   end
 
-  # Переключение предыдущего уровеня
-  context '.previous_level' do
-    it 'move to next level ' do
-      expect(game_w_questions.previous_level).to eq -1
-      # Задаём правильный ответ 'd'
-      game_w_questions.answer_current_question!('d')
-      expect(game_w_questions.previous_level).not_to eq -1
-    end
-  end
-
-  # Переключение текущего уровня
-  context '.current_level' do
-    it 'move to next level' do
-      expect(game_w_questions.current_level).to eq 0
-      # Задаём правильный ответ 'd'
-      game_w_questions.answer_current_question!('d')
-      expect(game_w_questions.current_level).not_to eq 0
+  # предыдущий уровень
+  context '#previous_level' do
+    it 'when the current level > previous level' do
+      level = game_w_questions.current_level - 1
+      expect(level).to eq game_w_questions.previous_level
     end
   end
 end
