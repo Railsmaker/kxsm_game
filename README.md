@@ -34,7 +34,7 @@ gem install rails
 
 Склонируйте данный репозиторий: 
 ``` 
-sudo clone git@github.com:Raysmaker/game_KXSM.git
+git clone git@github.com:Raysmaker/game_KXSM.git
 ```
 Скачайте все зависимости приложения:
 ``` 

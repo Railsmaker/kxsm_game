@@ -130,12 +130,10 @@ RSpec.describe Game, type: :model do
     let(:game_with_questions){
       FactoryBot.create :game_with_questions, current_level: 5
     }
-
     let(:d){
       q = game_with_questions.current_game_question
       q.correct_answer_key
     }
-
     context 'when the user answered correctly' do
 
       it 'return true' do
@@ -154,5 +152,38 @@ RSpec.describe Game, type: :model do
       end
     end
 
+    context 'when the answer is wrong' do
+      it 'return false' do
+        result = game_with_questions.answer_current_question!('a')
+        expect(result).to eq false
+      end
+
+      it 'fails the game' do
+        game_with_questions.answer_current_question!('a')
+        expect(game_with_questions.status).to eq :fail
+      end
+
+      it 'updates prize' do
+        game_with_questions.answer_current_question!('a')
+        expect(game_with_questions.prize).to eq 1_000
+      end
+
+      it 'game level' do
+        game_with_questions.answer_current_question!('a')
+        expect(game_with_questions.current_level).to eq 5
+      end
+
+      it 'return "true" for last answer' do
+        15.times do
+          game_with_questions.answer_current_question!('d')
+        end
+        expect(game_with_questions.prize).to eq 1_000_000
+      end
+
+      it 'return "false" for timed out answer' do
+        expect(game_with_questions.is_failed).to be false
+      end
+
+    end
   end
 end
