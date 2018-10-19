@@ -125,4 +125,34 @@ RSpec.describe Game, type: :model do
       expect(level).to eq game_w_questions.previous_level
     end
   end
+
+  describe '#answer_current_question!' do
+    let(:game_with_questions){
+      FactoryBot.create :game_with_questions, current_level: 5
+    }
+
+    let(:d){
+      q = game_with_questions.current_game_question
+      q.correct_answer_key
+    }
+
+    context 'when the user answered correctly' do
+
+      it 'return true' do
+        result = game_with_questions.answer_current_question!(d)
+        expect(result).to eq true
+      end
+
+      it 'game status' do
+        game_with_questions.answer_current_question!(d)
+        expect(game_with_questions.status).to eq :in_progress
+      end
+
+      it 'increment game level' do
+        game_with_questions.answer_current_question!(d)
+        expect(game_with_questions.current_level).to eq 6
+      end
+    end
+
+  end
 end
