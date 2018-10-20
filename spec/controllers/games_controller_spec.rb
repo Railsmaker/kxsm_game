@@ -56,5 +56,17 @@ RSpec.describe GamesController, type: :controller do
       expect(flash.empty?).to be_truthy
     end
 
+    # проверка, пользователь не может играть в чужую игру
+    it '#show alien game' do
+      # создаем новую игру, юзер не прописан, будет создан фабрикой новый
+      alien_game = FactoryBot.create(:game_with_questions)
+
+      # пробуем зайти на эту игру текущий залогиненным user
+      get :show, id: alien_game.id
+
+      expect(response.status).not_to eq(200) # статус не 200 ОК
+      expect(response).to redirect_to(root_path)
+      expect(flash[:alert]).to be
+    end
   end
 end
