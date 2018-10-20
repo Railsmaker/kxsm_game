@@ -7,8 +7,8 @@ RSpec.describe GamesController, type: :controller do
   let(:admin){FactoryBot.create(:user, is_admin: true)}
   let(:game_w_questions){FactoryBot.create(:game_with_questions, user: user)}
 
-  context 'Anonymous user' do
-    it 'kick from #show' do
+  context 'Anonymous user:' do
+    it '#show.' do
       get :show, id: game_w_questions.id
 
       # недолжна вернуться успешная страница
@@ -51,7 +51,7 @@ RSpec.describe GamesController, type: :controller do
 
   end
 
-  context 'Logged in user' do
+  context 'Logged in user:' do
     before(:each)do
       sign_in user
     end
@@ -87,6 +87,16 @@ RSpec.describe GamesController, type: :controller do
       expect(game.current_level).to be > 0
       expect(response).to redirect_to(game_path(game))
       expect(flash.empty?).to be_truthy
+    end
+
+    it 'answer wrong' do
+      game_w_questions.update_attribute(:current_level, 2)
+
+      put :answer, id: game_w_questions.id, params: {answer: 'a'}
+
+      expect(response.status).not_to eq 200
+      expect(response).to redirect_to(user_path(user))
+      expect(flash[:alert]).to be
     end
 
     # проверка, пользователь не может играть в чужую игру
