@@ -17,9 +17,36 @@ RSpec.describe GamesController, type: :controller do
       expect(flash[:alert]).to be
     end
 
-    it '#show game if not registered' do
+    it '#show. without user registration' do
       get :show, id: game_w_questions.id
+
       expect(response.status).to eq 302
+      expect(response).to redirect_to(new_user_session_path)
+      expect(flash[:alert]).to eq 'Вам необходимо войти в систему или зарегистрироваться.'
+    end
+
+    it '#create. without user registration' do
+      post :create
+
+      expect(response.status).to eq 302
+      expect(response).to redirect_to(new_user_session_path)
+      expect(flash[:alert]).to eq 'Вам необходимо войти в систему или зарегистрироваться.'
+    end
+
+    it '#answer. without user registration' do
+      put :answer, id: game_w_questions, params: {letter: 'a'}
+
+      expect(response.status).to eq 302
+      expect(response).to redirect_to(new_user_session_path)
+      expect(flash[:alert]).to eq 'Вам необходимо войти в систему или зарегистрироваться.'
+    end
+
+    it '#take_money. without user registration' do
+      put :take_money, id: game_w_questions.id
+
+      expect(response.status).to eq 302
+      expect(response).to redirect_to(new_user_session_path)
+      expect(flash[:alert]).to eq 'Вам необходимо войти в систему или зарегистрироваться.'
     end
 
   end
