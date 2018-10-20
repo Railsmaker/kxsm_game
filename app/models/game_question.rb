@@ -8,6 +8,8 @@ class GameQuestion < ActiveRecord::Base
   validates :game, :question, presence: true
   validates :a, :b, :c, :d, inclusion: {in: 1..4}
 
+  serialize :help_hash, Hash
+
   def variants
     {
       'a' => question.read_attribute("answer#{a}"),
