@@ -41,6 +41,11 @@ git clone git@github.com:Raysmaker/game_KXSM.git
 Скачайте все зависимости приложения:
 ``` 
 bundle install
+
+или
+
+bundle install --path vendor/cache
+
 ```
 Создайте структуру таблиц в базе данных:
 ``` 
