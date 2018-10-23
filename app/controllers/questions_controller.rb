@@ -1,5 +1,14 @@
+# (c) goodprogrammer.ru
+#
+# Админский контроллер, только для наполнения базы вопросов с помощью файлов
+# определенного формата
+# Создает новую игру, обновляет статус игры по ответам юзера, выдает подсказки
+#
 class QuestionsController < ApplicationController
+  # проверяем залогинен ли юзер
   before_action :authenticate_user!
+
+  # проверяем админ ли он
   before_action :authorize_admin!
 
   # GET /questions/new
@@ -32,8 +41,8 @@ class QuestionsController < ApplicationController
     # отправляем на страницу new и выводим статистику о проделаных операциях
     redirect_to new_questions_path,
                 notice: "Уровень #{level}, обработано #{file_lines.size}," +
-                    " создано #{file_lines.size - failed_count}," +
-                    " время #{Time.at((Time.now - start_time).to_i).utc.strftime '%S.%L сек'}"
+                  " создано #{file_lines.size - failed_count}," +
+                  " время #{Time.at((Time.now - start_time).to_i).utc.strftime '%S.%L сек'}"
   end
 
 
@@ -52,12 +61,12 @@ class QuestionsController < ApplicationController
       lines.each do |line|
         ar = line.split('|')
         q = Question.create(
-            level: level,
-            text: ar[0].squish,
-            answer1: ar[1].squish,
-            answer2: ar[2].squish,
-            answer3: ar[3].squish,
-            answer4: ar[4].squish
+          level: level,
+          text: ar[0].squish,
+          answer1: ar[1].squish,
+          answer2: ar[2].squish,
+          answer3: ar[3].squish,
+          answer4: ar[4].squish
         )
         failed += 1 unless q.valid?
       end
