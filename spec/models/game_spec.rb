@@ -170,6 +170,8 @@ RSpec.describe Game, type: :model do
     it 'when game time is over' do
       game_with_questions.created_at =  Time.now - 36.minutes
       expect(game_with_questions.time_out!).to be true
+      # fails the game
+      expect(game_with_questions.status).to eq :timeout
     end
   end
 end
