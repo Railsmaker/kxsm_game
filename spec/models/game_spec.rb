@@ -121,12 +121,9 @@ RSpec.describe Game, type: :model do
     it 'return valid instance of GameQuestion' do
       expect(game_w_questions.current_game_question).to eq current_game_q
     end
-
   end
 
-  # предыдущий уровень
   context '#previous_level' do
-
     it 'when enters the range 0..14' do
       expect(game_w_questions.current_level).to be_truthy
       expect(game_w_questions.current_level).to be_between(0, 14).inclusive
@@ -137,64 +134,42 @@ RSpec.describe Game, type: :model do
     end
   end
 
-  describe '#answer_current_question!' do
-    let(:game_with_questions){
-      FactoryBot.create :game_with_questions, current_level: 5
-    }
-    let(:d){
-      q = game_with_questions.current_game_question
-      q.correct_answer_key
-    }
-    context 'when the user answered correctly' do
+  context '#answer_current_question!' do
+    let(:game_with_questions){FactoryBot.create :game_with_questions, current_level: 5}
 
-      it 'return true' do
-        result = game_with_questions.answer_current_question!(d)
-        expect(result).to eq true
-      end
-
-      it 'game status' do
-        game_with_questions.answer_current_question!(d)
-        expect(game_with_questions.status).to eq :in_progress
-      end
-
-      it 'increment game level' do
-        game_with_questions.answer_current_question!(d)
-        expect(game_with_questions.current_level).to eq 6
-      end
+    it 'when the user answered correctly' do
+      # return true
+      expect(game_with_questions.answer_current_question!('d')).to eq true
+      # game status
+      expect(game_with_questions.status).to eq :in_progress
+      # increment game level
+      expect(game_with_questions.current_level).to eq 6
     end
 
-    context 'when the answer is wrong' do
-      it 'return false' do
-        result = game_with_questions.answer_current_question!('a')
-        expect(result).to eq false
-      end
+    it 'when the answer is wrong' do
+      # return false
+      expect(game_with_questions.answer_current_question!('a')).to eq false
+      # fails the game
+      expect(game_with_questions.status).to eq :fail
+      # updates prize
+      expect(game_with_questions.prize).to eq 1_000
+      # game level
+      expect(game_with_questions.current_level).to eq 5
+    end
 
-      it 'fails the game' do
-        game_with_questions.answer_current_question!('a')
-        expect(game_with_questions.status).to eq :fail
+    it 'when is the last answer' do
+      15.times do
+        game_with_questions.answer_current_question!('d')
       end
+      # the prize amount million
+      expect(game_with_questions.prize).to eq 1_000_000
+      # return "false" for timed out answer
+      expect(game_with_questions.is_failed).to be false
+    end
 
-      it 'updates prize' do
-        game_with_questions.answer_current_question!('a')
-        expect(game_with_questions.prize).to eq 1_000
-      end
-
-      it 'game level' do
-        game_with_questions.answer_current_question!('a')
-        expect(game_with_questions.current_level).to eq 5
-      end
-
-      it 'return "true" for last answer' do
-        15.times do
-          game_with_questions.answer_current_question!('d')
-        end
-        expect(game_with_questions.prize).to eq 1_000_000
-      end
-
-      it 'return "false" for timed out answer' do
-        expect(game_with_questions.is_failed).to be false
-      end
-
+    it 'when game time is over' do
+      game_with_questions.created_at =  Time.now - 36.minutes
+      expect(game_with_questions.time_out!).to be true
     end
   end
 end
