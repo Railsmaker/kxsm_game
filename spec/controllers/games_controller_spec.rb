@@ -86,11 +86,10 @@ RSpec.describe GamesController, type: :controller do
     end
 
     it 'answer wrong' do
-      game_w_questions.update_attribute(:current_level, 2)
+      put :answer, id: game_w_questions.id, params: {letter: 'a'}
+      game = assigns(:game)
 
-      put :answer, id: game_w_questions.id, params: {answer: 'a'}
-
-      expect(response.status).not_to eq 200
+      expect(game.finished?).to be_truthy
       expect(response).to redirect_to(user_path(user))
       expect(flash[:alert]).to be
     end
