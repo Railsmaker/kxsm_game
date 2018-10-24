@@ -112,17 +112,28 @@ RSpec.describe Game, type: :model do
 
   # возвращает валидный экземпляр из модели GameQuestion
   context '#current_game_question' do
+    let(:current_game_q){game_w_questions.game_questions[0]}
+
+    it 'when valid instance is present' do
+      expect(:current_game_q).to be_truthy
+    end
+
     it 'return valid instance of GameQuestion' do
-      current_game_q = game_w_questions.game_questions[0]
       expect(game_w_questions.current_game_question).to eq current_game_q
     end
+
   end
 
   # предыдущий уровень
   context '#previous_level' do
+
+    it 'when enters the range 0..14' do
+      expect(game_w_questions.current_level).to be_truthy
+      expect(game_w_questions.current_level).to be_between(0, 14).inclusive
+    end
+
     it 'when the current level > previous level' do
-      level = game_w_questions.current_level - 1
-      expect(level).to eq game_w_questions.previous_level
+      expect(game_w_questions.previous_level).to eq game_w_questions.current_level - 1
     end
   end
 
