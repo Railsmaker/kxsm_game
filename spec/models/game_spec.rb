@@ -124,13 +124,10 @@ RSpec.describe Game, type: :model do
   end
 
   context '#previous_level' do
-    it 'when enters the range 0..14' do
-      expect(game_w_questions.current_level).to be_truthy
-      expect(game_w_questions.current_level).to be_between(0, 14).inclusive
-    end
+    let(:game_with_questions){FactoryBot.create :game_with_questions, current_level: 5}
 
     it 'when the current level > previous level' do
-      expect(game_w_questions.previous_level).to eq game_w_questions.current_level - 1
+      expect(game_with_questions.previous_level).to eq 4
     end
   end
 
