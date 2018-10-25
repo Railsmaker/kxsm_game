@@ -27,15 +27,13 @@ class GameQuestion < ActiveRecord::Base
   # см. ссылки в материалах урока
   serialize :help_hash, Hash
 
-  # help_hash у нас имеет такой формат:
+  # help_hash такой формат:
   # {
   #   fifty_fifty: ['a', 'b'], # При использовании подсказски остались варианты a и b
   #   audience_help: {'a' => 42, 'c' => 37 ...}, # Распределение голосов по вариантам a, b, c, d
   #   friend_call: 'Василий Петрович считает, что правильный ответ A'
   # }
   #
-
-
   # ----- Основные методы для доступа к данным в шаблонах и контроллерах -----------
 
   # Возвращает хэш, отсортированный по ключам:
@@ -62,6 +60,17 @@ class GameQuestion < ActiveRecord::Base
   # текст правильного ответа
   def correct_answer
     variants[correct_answer_key]
+  end
+
+  def apply_help!(help_type)
+    case help_type.to_sym
+    when :fifty_fifty
+      add_fifty_fifty
+    when :audience_help
+      add_audience_help
+    when :friend_call
+      add_friend_call
+    end
   end
 
   # Добавляем в help_hash по ключю fifty_fifty - массив из двух вариантов: правильный и случайный
