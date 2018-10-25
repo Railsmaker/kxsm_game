@@ -36,4 +36,34 @@ RSpec.describe GameQuestion, type: :model do
       expect(game_question.correct_answer_key).to eq 'b'
     end
   end
+
+  context 'user helpers' do
+    it '#add_audience_help' do
+      expect(game_question.help_hash).not_to include(:audience_help)
+      game_question.add_audience_help
+      expect(game_question.help_hash).to include(:audience_help)
+      # audience_help: {'a' => 42, 'c' => 37 ...}
+      ah = game_question.help_hash[:audience_help]
+      expect(ah.keys).to contain_exactly('a', 'b', 'c', 'd')
+    end
+
+    it '#add_fifty_fifty' do
+      expect(game_question.help_hash).not_to include(:fifty_fifty)
+      game_question.add_fifty_fifty
+      expect(game_question.help_hash).to include(:fifty_fifty)
+      # fifty_fifty: ['a', 'b']
+      expect(game_question.help_hash[:fifty_fifty].size).to eq(2)
+      expect(game_question.help_hash[:fifty_fifty]).to include('b')
+    end
+
+    it '#add_friend_call' do
+      expect(game_question.help_hash).not_to include(:friend_call)
+      game_question.add_friend_call
+      game_question.help_hash[:friend_call] = 'Подсказка друга, ответ: А'
+      expect(game_question.help_hash).to include(:friend_call)
+      #  friend_call: Подсказка друга, ответ: А
+      expect(game_question.help_hash[:friend_call]).to be
+      expect(game_question.help_hash).to eq({friend_call: 'Подсказка друга, ответ: А'})
+    end
+  end
 end
