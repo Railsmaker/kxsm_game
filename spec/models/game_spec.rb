@@ -112,14 +112,15 @@ RSpec.describe Game, type: :model do
 
   # возвращает валидный экземпляр из модели GameQuestion
   context '#current_game_question' do
-    let(:current_game_q){game_w_questions.game_questions[0]}
+    let(:game_with_questions){FactoryBot.create :game_with_questions, current_level: 7}
+    let(:current_game_q){game_with_questions.game_questions[7]}
 
     it 'when valid instance is present' do
       expect(:current_game_q).to be_truthy
     end
 
     it 'return valid instance of GameQuestion' do
-      expect(game_w_questions.current_game_question).to eq current_game_q
+      expect(game_with_questions.current_game_question).to eq current_game_q
     end
   end
 
