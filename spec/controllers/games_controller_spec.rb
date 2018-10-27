@@ -149,5 +149,21 @@ RSpec.describe GamesController, type: :controller do
       expect(flash[:alert]).to be
     end
 
+    # 50/50 подсказка
+    it 'fifty_fifty is available' do
+      expect(game_w_questions.fifty_fifty_used).to be_falsey
+      expect(game_w_questions.current_game_question.help_hash[:fifty_fifty]).not_to be
+
+      put :help, id: game_w_questions.id, help_type: :fifty_fifty
+      game = assigns(:game)
+
+      expect(game.fifty_fifty_used).to be_truthy
+      expect(game.current_game_question.help_hash[:fifty_fifty]).to be
+
+      expect(response).to redirect_to(game_path(game))
+      expect(response.status).to eq(302)
+
+      expect(flash[:info]).to eq('Вы использовали подсказку')
+    end
   end
 end
