@@ -159,10 +159,8 @@ RSpec.describe GamesController, type: :controller do
 
       expect(game.fifty_fifty_used).to be_truthy
       expect(game.current_game_question.help_hash[:fifty_fifty]).to be
-
       expect(response).to redirect_to(game_path(game))
       expect(response.status).to eq(302)
-
       expect(flash[:info]).to eq('Вы использовали подсказку')
     end
   end
