@@ -58,10 +58,10 @@ RSpec.describe GameQuestion, type: :model do
 
     it '#add_friend_call' do
       expect(game_question.help_hash).not_to include(:friend_call)
-      game_question.add_friend_call
-      game_question.help_hash[:friend_call] = 'Подсказка друга, ответ: А'
-      expect(game_question.help_hash).to include(:friend_call)
+      allow(GameHelpGenerator).to receive(:friend_call) {'Подсказка друга, ответ: А'}
       #  friend_call: Подсказка друга, ответ: А
+      game_question.add_friend_call
+      expect(game_question.help_hash).to include(:friend_call)
       expect(game_question.help_hash[:friend_call]).to be
       expect(game_question.help_hash).to eq({friend_call: 'Подсказка друга, ответ: А'})
     end
