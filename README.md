@@ -57,8 +57,6 @@ rake db:seed
 ```
 ##
 <h4>Запуск  игры: </h4>
-
-Старт приложения, адрес видимости: <a href="http://localhost:3000">http://localhost:3000 </a>
 ``` 
 bundle exec rails server 
 ```
