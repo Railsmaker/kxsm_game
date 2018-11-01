@@ -1,5 +1,5 @@
 <h2><small>Game name: </small>Who wants to be a millionaire?</h2>
-<h4><small>Игра: Кто хочет стать миллионером?</small></h4>
+<h4><small>Игра: Кто хочет стать миллионером? <a href="https://kxsm2018.herokuapp.com/">образец</a></small></h4>
 <img src="http://hitvid.ru/uploads/posts/2012-12/1356267451_kto-hochet-stat-millionerom.png" width="355"/>
 <br />
 Правила игры: 
