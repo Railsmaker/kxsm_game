@@ -57,6 +57,7 @@ rake db:seed
 ```
 ##
 <h4>Запуск  игры: </h4>
+
 ``` 
 bundle exec rails server 
 ```
