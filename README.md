@@ -60,6 +60,7 @@ rake db:seed
 ``` 
 bundle exec rails server 
 ```
+
 ##
 <h4> Об авторе: </h4>
 Школа: <a href="http://goodprogrammer.ru/">хороший программист"</a><br/>
