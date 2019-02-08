@@ -1,6 +1,6 @@
 <h2><small>Game name: </small>Who wants to be a millionaire?</h2>
 <h4><small>Игра: Кто хочет стать миллионером? <a href="https://kxsm2018.herokuapp.com/">образец</a></small></h4>
-<img src="http://hitvid.ru/uploads/posts/2012-12/1356267451_kto-hochet-stat-millionerom.png" width="355"/>
+<img src="https://yandex.ru/images/search?pos=22&img_url=https%3A%2F%2Fi.ytimg.com%2Fvi%2FTiqDh-gOlMo%2Fmaxresdefault.jpg&text=%D0%BA%D1%82%D0%BE%20%D1%85%D0%BE%D1%87%D0%B5%D1%82%20%D1%81%D1%82%D0%B0%D1%82%D1%8C%20%D0%BC%D0%B8%D0%BB%D0%BB%D0%B8%D0%BE%D0%BD%D0%B5%D1%80%D0%BE%D0%BC%20%D0%B8%D0%B3%D1%80%D0%B0%D1%82%D1%8C&rpt=simage" width="355"/>
 <br />
 Правила игры: 
 <a href="https://ru.wikipedia.org/wiki/%D0%9A%D1%82%D0%BE_%D1%85%D0%BE%D1%87%D0%B5%D1%82_%D1%81%D1%82%D0%B0%D1%82%D1%8C_%D0%BC%D0%B8%D0%BB%D0%BB%D0%B8%D0%BE%D0%BD%D0%B5%D1%80%D0%BE%D0%BC%3F">здесь</a>
